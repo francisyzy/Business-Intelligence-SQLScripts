@@ -104,16 +104,16 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Customers](
 	[customerNumber] [int] NOT NULL,
-	[city] [nvarchar](50) NULL,
-	[state] [nvarchar](50) NULL,
-	[country] [nvarchar](50) NULL,
-	[creditLimit] [decimal](10, 2) NULL,
 	[contactFirstName] [nvarchar](50) NULL,
 	[contactLastName] [nvarchar](50) NULL,
 	[phone] [nvarchar](50) NULL,
 	[addressLine1] [nvarchar](50) NULL,
 	[addressLine2] [nvarchar](50) NULL,
 	[postalCode] [nvarchar](15) NULL,
+	[city] [nvarchar](50) NULL,
+	[state] [nvarchar](50) NULL,
+	[country] [nvarchar](50) NULL,
+	[creditLimit] [decimal](10, 2) NULL,
  CONSTRAINT [PK_Customer] PRIMARY KEY CLUSTERED 
 (
 	[customerNumber] ASC
@@ -127,10 +127,10 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Employees](
 	[employeeNumber] [int] NOT NULL,
-	[extension] [nvarchar](50) NULL,
-	[jobTitle] [nvarchar](50) NULL,
 	[firstName] [nvarchar](50) NULL,
 	[lastName] [nvarchar](50) NULL,
+	[jobTitle] [nvarchar](50) NULL,
+	[extension] [nvarchar](50) NULL,
 	[email] [nvarchar](100) NULL,
 	[reportsTo] [int] NULL,
  CONSTRAINT [PK_Employees] PRIMARY KEY CLUSTERED 
@@ -166,9 +166,10 @@ CREATE TABLE [dbo].[Products](
 	[productName] [nvarchar](70) NULL,
 	[productScale] [nvarchar](10) NULL,
 	[productVendor] [nvarchar](50) NULL,
+	[productLine] [nvarchar](50) NULL,
+	[quantityInStock] [int] NULL,
 	[buyPrice] [decimal](10, 2) NULL,
 	[msrp] [decimal](10, 2) NULL,
-	[productLine] [nvarchar](50) NULL,
  CONSTRAINT [PK_Products] PRIMARY KEY CLUSTERED 
 (
 	[productCode] ASC
@@ -181,26 +182,32 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[SalesFacts](
-	[customerNumber] [int] NOT NULL,
+    [customerNumber] [int] NOT NULL,
+    [orderNumber] [int] NOT NULL,
 	[productCode] [nvarchar](15) NOT NULL,
-	[employeeNumber] [int] NOT NULL,
+	[quantityOrdered] [int] NOT NULL,
+	[priceEach] [decimal](10, 2) NOT NULL,
 	[orderTimeKey] [int] NOT NULL,
 	[requiredTimeKey] [int] NOT NULL,
 	[shippedTimeKey] [int] NOT NULL,
+	[status] [nvarchar](15) NOT NULL,	
+	[employeeNumber] [int] NOT NULL,
 	[officeCode] [nvarchar](10) NOT NULL,
-	[orderNumber] [int] NOT NULL,
-	[quantityOrdered] [int] NOT NULL,
-	[priceEach] [decimal](10, 2) NOT NULL,
+	
 PRIMARY KEY CLUSTERED 
 (
 	[customerNumber] ASC,
+	[orderNumber] ASC,
 	[productCode] ASC,
-	[employeeNumber] ASC,
+	[quantityOrdered] ASC,
+	[priceEach] ASC,
 	[orderTimeKey] ASC,
 	[requiredTimeKey] ASC,
 	[shippedTimeKey] ASC,
-	[officeCode] ASC,
-	[orderNumber] ASC
+	[status] ASC,
+	[employeeNumber] ASC,
+	[officeCode] ASC
+
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
