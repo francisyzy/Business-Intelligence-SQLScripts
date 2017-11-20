@@ -185,26 +185,23 @@ CREATE TABLE [dbo].[SalesFacts](
     [customerNumber] [int] NOT NULL,
     [orderNumber] [int] NOT NULL,
 	[productCode] [nvarchar](15) NOT NULL,
-	[quantityOrdered] [int] NOT NULL,
-	[priceEach] [decimal](10, 2) NOT NULL,
 	[orderTimeKey] [int] NOT NULL,
 	[requiredTimeKey] [int] NOT NULL,
 	[shippedTimeKey] [int] NOT NULL,
-	[status] [nvarchar](15) NOT NULL,	
 	[employeeNumber] [int] NOT NULL,
 	[officeCode] [nvarchar](10) NOT NULL,
+	[quantityOrdered] [int] NOT NULL,
+	[priceEach] [decimal](10, 2) NOT NULL,
+	[status] [nvarchar](15) NOT NULL,	
 	
 PRIMARY KEY CLUSTERED 
 (
 	[customerNumber] ASC,
 	[orderNumber] ASC,
 	[productCode] ASC,
-	[quantityOrdered] ASC,
-	[priceEach] ASC,
 	[orderTimeKey] ASC,
 	[requiredTimeKey] ASC,
 	[shippedTimeKey] ASC,
-	[status] ASC,
 	[employeeNumber] ASC,
 	[officeCode] ASC
 
