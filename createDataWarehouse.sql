@@ -185,23 +185,20 @@ CREATE TABLE [dbo].[SalesFacts](
     [customerNumber] [int] NOT NULL,
     [orderNumber] [int] NOT NULL,
 	[productCode] [nvarchar](15) NOT NULL,
-	[orderTimeKey] [int] NOT NULL,
-	[requiredTimeKey] [int] NOT NULL,
-	[shippedTimeKey] [int] NOT NULL,
+	[timeKey] [int] NOT NULL,
 	[employeeNumber] [int] NOT NULL,
 	[officeCode] [nvarchar](10) NOT NULL,
 	[quantityOrdered] [int] NOT NULL,
 	[priceEach] [decimal](10, 2) NOT NULL,
 	[status] [nvarchar](15) NOT NULL,	
+	[timeIndicator] [nvarchar](15) NOT NULL,
 	
 PRIMARY KEY CLUSTERED 
 (
 	[customerNumber] ASC,
 	[orderNumber] ASC,
 	[productCode] ASC,
-	[orderTimeKey] ASC,
-	[requiredTimeKey] ASC,
-	[shippedTimeKey] ASC,
+	[timeKey] ASC,
 	[employeeNumber] ASC,
 	[officeCode] ASC
 
@@ -238,17 +235,11 @@ GO
 ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([officeCode])
 REFERENCES [dbo].[Offices] ([officeCode])
 GO
-ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([orderTimeKey])
+ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([timeKey])
 REFERENCES [dbo].[Time] ([timeKey])
 GO
 ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([productCode])
 REFERENCES [dbo].[Products] ([productCode])
-GO
-ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([requiredTimeKey])
-REFERENCES [dbo].[Time] ([timeKey])
-GO
-ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([shippedTimeKey])
-REFERENCES [dbo].[Time] ([timeKey])
 GO
 USE [master]
 GO
