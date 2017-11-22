@@ -102,7 +102,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Customers](
+CREATE TABLE [dbo].[Customer](
 	[customerNumber] [int] NOT NULL,
 	[contactFirstName] [nvarchar](50) NULL,
 	[contactLastName] [nvarchar](50) NULL,
@@ -125,7 +125,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Employees](
+CREATE TABLE [dbo].[Employee](
 	[employeeNumber] [int] NOT NULL,
 	[firstName] [nvarchar](50) NULL,
 	[lastName] [nvarchar](50) NULL,
@@ -144,7 +144,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Offices](
+CREATE TABLE [dbo].[Office](
 	[officeCode] [nvarchar](10) NOT NULL,
 	[city] [nvarchar](50) NULL,
 	[state] [nvarchar](50) NULL,
@@ -161,7 +161,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[Products](
+CREATE TABLE [dbo].[Product](
 	[productCode] [nvarchar](15) NOT NULL,
 	[productName] [nvarchar](70) NULL,
 	[productScale] [nvarchar](10) NULL,
@@ -181,7 +181,7 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
-CREATE TABLE [dbo].[SalesFacts](
+CREATE TABLE [dbo].[SalesFact](
     [customerNumber] [int] NOT NULL,
     [orderNumber] [int] NOT NULL,
 	[productCode] [nvarchar](15) NOT NULL,
@@ -226,20 +226,20 @@ CREATE TABLE [dbo].[Time](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([customerNumber])
-REFERENCES [dbo].[Customers] ([customerNumber])
+ALTER TABLE [dbo].[SalesFact]  WITH CHECK ADD FOREIGN KEY([customerNumber])
+REFERENCES [dbo].[Customer] ([customerNumber])
 GO
-ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([employeeNumber])
-REFERENCES [dbo].[Employees] ([employeeNumber])
+ALTER TABLE [dbo].[SalesFact]  WITH CHECK ADD FOREIGN KEY([employeeNumber])
+REFERENCES [dbo].[Employee] ([employeeNumber])
 GO
-ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([officeCode])
-REFERENCES [dbo].[Offices] ([officeCode])
+ALTER TABLE [dbo].[SalesFact]  WITH CHECK ADD FOREIGN KEY([officeCode])
+REFERENCES [dbo].[Office] ([officeCode])
 GO
-ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([timeKey])
+ALTER TABLE [dbo].[SalesFact]  WITH CHECK ADD FOREIGN KEY([timeKey])
 REFERENCES [dbo].[Time] ([timeKey])
 GO
-ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([productCode])
-REFERENCES [dbo].[Products] ([productCode])
+ALTER TABLE [dbo].[SalesFact]  WITH CHECK ADD FOREIGN KEY([productCode])
+REFERENCES [dbo].[Product] ([productCode])
 GO
 USE [master]
 GO
