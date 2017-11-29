@@ -238,16 +238,16 @@ GO
 ALTER TABLE [dbo].[SalesFact]  WITH CHECK ADD FOREIGN KEY([officeCode])
 REFERENCES [dbo].[Office] ([officeCode])
 GO
-ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([orderTimeKey])
+ALTER TABLE [dbo].[SalesFact]  WITH CHECK ADD FOREIGN KEY([orderTimeKey])
 REFERENCES [dbo].[Time] ([timeKey])
 GO
 ALTER TABLE [dbo].[SalesFact]  WITH CHECK ADD FOREIGN KEY([productCode])
 REFERENCES [dbo].[Product] ([productCode])
 GO
-ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([requiredTimeKey])
+ALTER TABLE [dbo].[SalesFact]  WITH CHECK ADD FOREIGN KEY([requiredTimeKey])
 REFERENCES [dbo].[Time] ([timeKey])
 GO
-ALTER TABLE [dbo].[SalesFacts]  WITH CHECK ADD FOREIGN KEY([shippedTimeKey])
+ALTER TABLE [dbo].[SalesFact]  WITH CHECK ADD FOREIGN KEY([shippedTimeKey])
 REFERENCES [dbo].[Time] ([timeKey])
 GO
 USE [master]
