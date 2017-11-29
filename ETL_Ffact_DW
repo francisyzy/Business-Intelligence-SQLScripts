@@ -1,0 +1,25 @@
+INSERT INTO BI_CA1_DW.SalesFact
+    ([customerNumber], [orderNumber], [productCode], [orderTimeKey], [requiredTimeKey], [shippedTimeKey], [employeeNumber], [officeCode], [quantityOrdered], [priceEach], [status])
+SELECT
+    replace(CONVERT(DATE,orders.orderdate,112),'-',''),
+    replace(CONVERT(DATE,orders.requireddate,112),'-',''),
+    customer.CustomerNumber,
+    product.ProductCode,
+    officeCode,
+    employeeNumber,
+    orderDetails.quantityOrdered,
+    orderDetails.priceEach
+    
+FROM
+BI_CA1_OLTP..orderDetails
+INNER JOIN BI_CA1_OLTP..orders
+ON orderDetails.orderNumber = order.orderNumber
+
+INNER JOIN BI_CA1_DW..customer
+ON order.customerNumber = customer.customerNumber
+
+INNER JOIN BI_CA1_DW..product
+ON orderDetails.productCode = product.productCode
+
+INNER JOIN
+(select oc.customerNumber 
