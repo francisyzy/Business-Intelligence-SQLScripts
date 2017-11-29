@@ -1,6 +1,6 @@
 USE [master]
 GO
-/** Object:  Database [BW_CA1_DW]    Script Date: 11/15/2017 12:29:57 PM **/
+/****** Object:  Database [BW_CA1_DW]    Script Date: 11/29/2017 11:29:59 AM ******/
 CREATE DATABASE [BW_CA1_DW]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -97,7 +97,7 @@ ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY SET QUERY_OPTIMIZER_HOTFIXES =
 GO
 USE [BW_CA1_DW]
 GO
-/** Object:  Table [dbo].[Customers]    Script Date: 11/15/2017 12:29:57 PM **/
+/****** Object:  Table [dbo].[Customer]    Script Date: 11/29/2017 11:29:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -120,7 +120,7 @@ CREATE TABLE [dbo].[Customer](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/** Object:  Table [dbo].[Employees]    Script Date: 11/15/2017 12:29:57 PM **/
+/****** Object:  Table [dbo].[Employee]    Script Date: 11/29/2017 11:29:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -139,7 +139,7 @@ CREATE TABLE [dbo].[Employee](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/** Object:  Table [dbo].[Offices]    Script Date: 11/15/2017 12:29:57 PM **/
+/****** Object:  Table [dbo].[Office]    Script Date: 11/29/2017 11:29:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -156,7 +156,7 @@ CREATE TABLE [dbo].[Office](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/** Object:  Table [dbo].[Products]    Script Date: 11/15/2017 12:29:57 PM **/
+/****** Object:  Table [dbo].[Product]    Script Date: 11/29/2017 11:29:59 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -176,14 +176,14 @@ CREATE TABLE [dbo].[Product](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/** Object:  Table [dbo].[SalesFacts]    Script Date: 11/15/2017 12:29:57 PM **/
+/****** Object:  Table [dbo].[SalesFact]    Script Date: 11/29/2017 11:30:00 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[SalesFact](
-    [customerNumber] [int] NOT NULL,
-    [orderNumber] [int] NOT NULL,
+	[customerNumber] [int] NOT NULL,
+	[orderNumber] [int] NOT NULL,
 	[productCode] [nvarchar](15) NOT NULL,
 	[orderTimeKey] [int] NOT NULL,
 	[requiredTimeKey] [int] NOT NULL,
@@ -192,23 +192,21 @@ CREATE TABLE [dbo].[SalesFact](
 	[officeCode] [nvarchar](10) NOT NULL,
 	[quantityOrdered] [int] NOT NULL,
 	[priceEach] [decimal](10, 2) NOT NULL,
-	[status] [nvarchar](15) NOT NULL,	
-	
+	[status] [nvarchar](15) NOT NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[customerNumber] ASC,
 	[orderNumber] ASC,
 	[productCode] ASC,
 	[orderTimeKey] ASC,
- 	[requiredTimeKey] ASC,
- 	[shippedTimeKey] ASC,
+	[requiredTimeKey] ASC,
+	[shippedTimeKey] ASC,
 	[employeeNumber] ASC,
 	[officeCode] ASC
-
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/** Object:  Table [dbo].[Time]    Script Date: 11/15/2017 12:29:57 PM **/
+/****** Object:  Table [dbo].[Time]    Script Date: 11/29/2017 11:30:00 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -228,6 +226,11 @@ CREATE TABLE [dbo].[Time](
 	[timeKey] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Employee]  WITH CHECK ADD  CONSTRAINT [FK_Employee_Employee] FOREIGN KEY([reportsTo])
+REFERENCES [dbo].[Employee] ([employeeNumber])
+GO
+ALTER TABLE [dbo].[Employee] CHECK CONSTRAINT [FK_Employee_Employee]
 GO
 ALTER TABLE [dbo].[SalesFact]  WITH CHECK ADD FOREIGN KEY([customerNumber])
 REFERENCES [dbo].[Customer] ([customerNumber])
