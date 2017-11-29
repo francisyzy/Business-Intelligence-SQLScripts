@@ -219,8 +219,6 @@ CREATE TABLE [dbo].[Time](
 	[day] [int] NULL,
 	[date] [datetime] NULL,
 	[dayOfWeek] [nvarchar](10) NULL,
-	[hour] [int] NULL,
-	[minute] [int] NULL,
  CONSTRAINT [PK_Time] PRIMARY KEY CLUSTERED 
 (
 	[timeKey] ASC
