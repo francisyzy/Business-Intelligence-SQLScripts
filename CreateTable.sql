@@ -64,8 +64,8 @@ references customers(customerNumber)
 Create table orders(
 orderNumber int not null,
 orderDate DATETIME not null,
-requiredDate DATETIME not null,
-shippedDate DATETIME not null,
+requiredDate DATETIME null,
+shippedDate DATETIME null,
 status VARCHAR(15) not null,
 comments TEXT null,
 customerNumber int not null,
