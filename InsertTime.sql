@@ -1,3 +1,6 @@
+insert into time --Zero referencing
+values (0,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
+
 /********************************************************************************************/
 --Specify Start Date and End date here
 --Value of Start Date Must be Less than Your End Date 
